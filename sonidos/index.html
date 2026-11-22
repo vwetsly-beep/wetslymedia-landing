@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Botones Interactivos con Sonido</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #121212;
+            color: #ffffff;
+        }
+        .contenedor {
+            text-align: center;
+            background: #1e1e1e;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+        }
+        .grupo-botones {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        button {
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.1s, opacity 0.2s;
+        }
+        button:active {
+            transform: scale(0.95);
+        }
+        .btn-exito { background-color: #28a745; color: white; }
+        .btn-alerta { background-color: #ffc107; color: black; }
+        .btn-error { background-color: #dc3545; color: white; }
+        .btn-ventana { background-color: #007bff; color: white; margin-top: 25px; }
+    </style>
+</head>
+<body>
+
+    <div class="contenedor">
+        <h1>Panel de Control Sonoro</h1>
+        <p>Presiona cualquier botón para probar el audio y la interacción:</p>
+        
+        <div class="grupo-botones">
+            <button class="btn-exito" onclick="ejecutarAccion('exito')">Confirmar</button>
+            <button class="btn-alerta" onclick="ejecutarAccion('alerta')">Notificación</button>
+            <button class="btn-error" onclick="ejecutarAccion('error')">Cancelar</button>
+        </div>
+
+        <!-- Botón para abrir esta misma página en una pestaña nueva -->
+        <button class="btn-ventana" onclick="abrirEnNuevaPestana()">Abrir en otra pestaña</button>
+    </div>
+
+    <script>
+        // Inicializar el contexto de audio de forma segura
+        let audioCtx;
+
+        function iniciarAudio() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+        }
+
+        // Generador de sonidos sintéticos (no requiere archivos .mp3 externos)
+        function reproducirSonido(tipo) {
+            iniciarAudio();
+            const oscilador = audioCtx.createOscillator();
+            const ganancia = audioCtx.createGain();
+
+            oscilador.connect(ganancia);
+            ganancia.connect(audioCtx.destination);
+
+            const ahora = audioCtx.currentTime;
+
+            if (tipo === 'exito') {
+                oscilador.type = 'sine';
+                oscilador.frequency.setValueAtTime(523.25, ahora); // Nota Do
+                oscilador.frequency.exponentialRampToValueAtTime(659.25, ahora + 0.15); // Nota Mi
+                ganancia.gain.setValueAtTime(0.3, ahora);
+                ganancia.gain.exponentialRampToValueAtTime(0.01, ahora + 0.3);
+                oscilador.start(ahora);
+                oscilador.stop(ahora + 0.3);
+            } else if (tipo === 'alerta') {
+                oscilador.type = 'triangle';
+                oscilador.frequency.setValueAtTime(440, ahora); // Nota La
+                ganancia.gain.setValueAtTime(0.3, ahora);
+                ganancia.gain.exponentialRampToValueAtTime(0.01, ahora + 0.25);
+                oscilador.start(ahora);
+                oscilador.stop(ahora + 0.25);
+            } else if (tipo === 'error') {
+                oscilador.type = 'sawtooth';
+                oscilador.frequency.setValueAtTime(150, ahora);
+                oscilador.frequency.linearRampToValueAtTime(100, ahora + 0.3);
+                ganancia.gain.setValueAtTime(0.3, ahora);
+                ganancia.gain.exponentialRampToValueAtTime(0.01, ahora + 0.3);
+                oscilador.start(ahora);
+                oscilador.stop(ahora + 0.3);
+            }
+        }
+
+        // Función principal que combina sonido + acción del botón
+        function ejecutarAccion(tipo) {
+            reproducirSonido(tipo);
+            console.log(`Botón presionado: ${tipo}`);
+        }
+
+        // Función para abrir la página actual en una nueva pestaña
+        function abrirEnNuevaPestana() {
+            reproducirSonido('alerta');
+            // window.location.href obtiene la ruta actual exacta, ya sea local o en internet
+            window.open(window.location.href, '_blank', 'noopener,noreferrer');
+        }
+    </script>
+</body>
+</html>

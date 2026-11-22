@@ -11,6 +11,7 @@ Página de una sola sección (one page) para vender servicios de video a negocio
 | `styles.css` | Diseño oscuro responsivo, botón flotante 24/7 con pulso verde |
 | `script.js` | Configuración del agente 24/7, menú móvil, animaciones, carga diferida de videos |
 | `netlify.toml` | Configuración de despliegue en Netlify (sitio estático, sin build) |
+| `sonidos/index.html` | Página aparte de prueba con botones que suenan (Confirmar, Notificación, Cancelar), en `/sonidos/`. No está enlazada desde la landing |
 
 ## Cambiar el número de WhatsApp, el teléfono o el mensaje
 
