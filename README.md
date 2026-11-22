@@ -6,7 +6,8 @@ Página de una sola sección (one page) para vender servicios de video a negocio
 
 | Archivo | Qué hace |
 |---|---|
-| `index.html` | Contenido de la página, SEO local (meta tags + datos estructurados LocalBusiness) |
+| `index.html` | Página principal en **inglés**, SEO local (meta tags + datos estructurados LocalBusiness) |
+| `es/index.html` | Versión en **español** (botón EN/ES en el menú para cambiar de idioma) |
 | `styles.css` | Diseño oscuro responsivo, botón flotante 24/7 con pulso verde |
 | `script.js` | Configuración del agente 24/7, menú móvil, animaciones, carga diferida de videos |
 | `netlify.toml` | Configuración de despliegue en Netlify (sitio estático, sin build) |
@@ -24,7 +25,11 @@ const AGENT_CONFIG = {
 };
 ```
 
-Todos los botones con `data-whatsapp` (menú, hero, servicios, CTA final, pie y botón flotante) y con `data-call` se actualizan solos. Los enlaces en el HTML ya traen el número por si JavaScript está desactivado; si cambias el número, búscalo también en `index.html` (`14013629364`).
+El mensaje de WhatsApp de cada idioma está en la etiqueta `<html data-wa-message="...">` de cada página (inglés en `index.html`, español en `es/index.html`).
+
+Todos los botones con `data-whatsapp` (menú, hero, servicios, CTA final, pie y botón flotante) y con `data-call` se actualizan solos. Los enlaces en el HTML ya traen el número por si JavaScript está desactivado; si cambias el número, búscalo también en `index.html` y `es/index.html` (`14013629364`).
+
+**Si cambias un texto, cámbialo en los dos idiomas.**
 
 ### Conectar un agente que responda en WhatsApp
 

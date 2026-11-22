@@ -14,7 +14,7 @@
 const AGENT_CONFIG = {
   whatsappNumber: "14013629364",
   phoneNumber: "+14013629364",
-  message: "Hola, quiero cotizar un video para mi negocio local",
+  message: "Hola, quiero cotizar un video para mi negocio local", // por defecto; cada página puede usar data-wa-message
   agentUrl: ""
 };
 
@@ -22,8 +22,10 @@ const AGENT_CONFIG = {
   "use strict";
 
   /* ----- Enlaces del agente 24/7 ----- */
+  // Cada idioma puede definir su propio mensaje con <html data-wa-message="...">
+  const waMessage = document.documentElement.dataset.waMessage || AGENT_CONFIG.message;
   const waLink = AGENT_CONFIG.agentUrl ||
-    `https://wa.me/${AGENT_CONFIG.whatsappNumber}?text=${encodeURIComponent(AGENT_CONFIG.message)}`;
+    `https://wa.me/${AGENT_CONFIG.whatsappNumber}?text=${encodeURIComponent(waMessage)}`;
 
   document.querySelectorAll("[data-whatsapp]").forEach((el) => {
     el.href = waLink;

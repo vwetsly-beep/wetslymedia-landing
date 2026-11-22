@@ -279,3 +279,17 @@ p { margin: 0 0 1em; }
   .fab { bottom: 16px; right: 16px; }
   .fab__status { font-size: .8rem; }
 }
+
+/* ---------- Selector de idioma EN / ES ---------- */
+.nav__lang {
+  font-family: var(--mono); font-size: .8rem; font-weight: 700; color: var(--text) !important;
+  border: 1px solid rgba(255,255,255,.35); border-radius: 6px; padding: .2rem .5rem;
+}
+.nav__lang:hover { border-color: var(--accent); }
+@media (max-width: 960px) { .nav__lang { width: auto !important; border: 1px solid rgba(255,255,255,.35) !important; margin: .8rem 0 .2rem; } }
+.nav__lang--mobile { display: none; }
+@media (max-width: 960px) {
+  .nav__links .nav__lang { display: none; }
+  .nav__lang--mobile { display: inline-block; margin: 0 0 0 auto !important; }
+  .nav__lang--mobile + .nav__cta { margin-left: .6rem; }
+}
