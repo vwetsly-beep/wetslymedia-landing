@@ -113,3 +113,13 @@ npm install -g netlify-cli
 netlify login
 netlify deploy --prod --dir .
 ```
+
+## Google (SEO)
+
+- `robots.txt` y `sitemap.xml` usan la dirección `https://wetslymedia-landing.netlify.app/`. Si conectas un dominio propio, cambia esa dirección en esos dos archivos y en las etiquetas `canonical` / `hreflang` de `index.html` y `es/index.html`.
+- En Netlify, la **protección de acceso** (Visitor access / Team protection) tiene que estar apagada, o Google no puede ver la página.
+- Para que Google la encuentre más rápido: entra a https://search.google.com/search-console, agrega la dirección del sitio y envía `sitemap.xml`.
+
+## Sonido de los videos
+
+Los clips `c1.mp4` a `c17.mp4` de wetslymedia.com son vistas previas cortas **sin pista de audio**. Para que se escuche, usa los reels completos de Instagram/TikTok/YouTube (ver "Usar YouTube, Vimeo o Instagram") o sube versiones `.mp4` con audio.

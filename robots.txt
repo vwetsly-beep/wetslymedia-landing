@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://wetslymedia-landing.netlify.app/sitemap.xml
