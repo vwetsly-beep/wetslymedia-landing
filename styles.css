@@ -293,3 +293,18 @@ p { margin: 0 0 1em; }
   .nav__lang--mobile { display: inline-block; margin: 0 0 0 auto !important; }
   .nav__lang--mobile + .nav__cta { margin-left: .6rem; }
 }
+
+/* ---------- Botón de sonido del hero ---------- */
+.sound-btn {
+  position: absolute; z-index: 3; right: 4%; bottom: 40px;
+  background: rgba(0,0,0,.6); color: #fff; border: 1px solid rgba(255,255,255,.5);
+  border-radius: 999px; padding: .65rem 1.1rem; font: inherit; font-weight: 700; font-size: .95rem;
+  cursor: pointer; backdrop-filter: blur(6px); transition: background .2s, border-color .2s;
+}
+.sound-btn:hover { background: rgba(0,0,0,.85); border-color: #fff; }
+@media (max-width: 600px) { .sound-btn { right: auto; left: 4%; bottom: 20px; top: auto; font-size: .85rem; } }
+/* Etiqueta de sonido en los reels */
+.reel::after {
+  content: "🔊"; position: absolute; top: 10px; right: 10px; z-index: 2; font-size: .85rem;
+  background: rgba(0,0,0,.55); border-radius: 999px; padding: 2px 7px;
+}

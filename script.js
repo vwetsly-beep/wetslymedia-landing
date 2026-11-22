@@ -111,7 +111,9 @@ const AGENT_CONFIG = {
           const ov = other.querySelector("video");
           if (ov && ov !== video && !ov.paused) { ov.pause(); other.classList.remove("is-playing"); }
         });
+        if (hero && !hero.muted && soundBtn) { hero.muted = true; soundBtn.textContent = soundBtn.dataset.on; soundBtn.setAttribute("aria-pressed", "false"); }
         video.muted = false;
+        video.volume = 1;
         video.play().catch(() => { video.muted = true; video.play(); });
         reel.classList.add("is-playing");
       } else {
@@ -130,6 +132,26 @@ const AGENT_CONFIG = {
       reels.forEach((r) => r.classList.toggle("is-hidden", f !== "all" && r.dataset.cat !== f));
     });
   });
+
+  /* ----- Sonido del video principal -----
+     Los navegadores solo permiten reproducir automáticamente videos en silencio,
+     así que el visitante activa el sonido con este botón. */
+  const hero = document.getElementById("heroVideo");
+  const soundBtn = document.getElementById("heroSound");
+  if (hero && soundBtn) {
+    soundBtn.addEventListener("click", () => {
+      const turnOn = hero.muted;
+      if (turnOn) {
+        // Pausa los videos del portafolio para que no se mezclen los sonidos
+        reels.forEach((r) => { const v = r.querySelector("video"); if (v && !v.paused) { v.pause(); r.classList.remove("is-playing"); } });
+        hero.muted = false; hero.volume = 1; hero.play().catch(() => {});
+      } else {
+        hero.muted = true;
+      }
+      soundBtn.textContent = turnOn ? soundBtn.dataset.off : soundBtn.dataset.on;
+      soundBtn.setAttribute("aria-pressed", String(turnOn));
+    });
+  }
 
   /* ----- Año del footer ----- */
   const y = document.getElementById("year");

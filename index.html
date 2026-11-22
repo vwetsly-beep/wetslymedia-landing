@@ -80,10 +80,11 @@
   <main>
     <!-- ============ HERO ============ -->
     <section class="hero">
-      <video class="hero__video" autoplay muted loop playsinline preload="metadata" poster="https://wetslymedia.com/img/og-image.jpg" aria-hidden="true">
+      <video class="hero__video" id="heroVideo" autoplay muted loop playsinline preload="metadata" poster="https://wetslymedia.com/img/og-image.jpg" aria-hidden="true">
         <source src="https://wetslymedia.com/media/c1.mp4" type="video/mp4" />
       </video>
       <div class="hero__overlay"></div>
+      <button class="sound-btn" id="heroSound" type="button" data-on="🔊 Turn on sound" data-off="🔇 Mute" aria-pressed="false">🔊 Turn on sound</button>
       <div class="hero__hud" aria-hidden="true">
         <span class="rec"><span class="rec__dot"></span>REC</span>
         <span>ISO 400 · 24FPS · 4K</span>
